@@ -1,12 +1,12 @@
-from utils import cat
-from utils import colony
 from utils import city
 
 
 def main() -> None:
 
-    # Start time in simulation
+    # Start time in simulation, 1 is equal to 4 months to match up to average cat pregnancy cycle. three cycles per year
     time = 0
+    # run for 5 years
+    cycles = 15 
 
     # set city size to desired kilometers^2.  Ankeny, Iowa is 76 km^2
     city_size = 76
@@ -20,25 +20,17 @@ def main() -> None:
     dead_cats = []
 
     # seed cats in the city and outside it
-    seed_cats(10, rural_cats, rural_area)
-    seed_cats(6, homeless_cats, sim_city)
+    sim_city.seed_cats(10, rural_cats)
+    rural_area.seed_cats(6, homeless_cats)
+
+    while time < cycles:
+        sim_city.seed_cats(10, rural_cats)
+        rural_area.seed_cats(6, homeless_cats)
+        time += 1
 
     # describe the city cats
     for animal in homeless_cats:
         animal.describe_cat()
-
-
-def seed_cats(seed_size: int, living_cats: list, sim_city: city.City) -> None:
-    # seed number for cats to start simulation
-    # representing a number of cats abandoned by owners
-    iterator = 1
-    while iterator < seed_size:
-        area = sim_city.return_random_area()
-        temp_cat = cat.Cat(area)
-        temp_cat2 = cat.Cat(area)
-        living_cats.append(temp_cat)
-        living_cats.append(temp_cat2)
-        iterator += 2
 
 
 if __name__ == "__main__":

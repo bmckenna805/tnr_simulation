@@ -15,12 +15,16 @@ class Cat:
     incest = False
     dead = False
     cause_of_death = ""
+    pregnant = False
 
     def __init__(self, area: str) -> None:
         self.city_area = area
         self.id = uuid.uuid4()
         sexes = ["male", "female"]
         self.sex = random.choice(sexes)
+
+    def birth(self) -> None:
+        pass
 
     def describe_cat(self) -> None:
         print(f'id: {self.id}')
@@ -30,3 +34,10 @@ class Cat:
         print(f'Colony Member?: {self.colony_member}')
         print(f'Dead?: {self.dead}')
         print("")
+
+    def impregnate(self) -> None:
+        if not self.neutered:
+            self.pregnant = True
+        
+    def mortality(self) -> None:
+        pass
