@@ -16,6 +16,7 @@ class Cat:
     dead = False
     cause_of_death = ""
     pregnant = False
+    father_of_litter = ""
 
     def __init__(self, area: str) -> None:
         self.city_area = area
@@ -23,7 +24,10 @@ class Cat:
         sexes = ["male", "female"]
         self.sex = random.choice(sexes)
 
-    def birth(self) -> None:
+    def age_cat(self) -> None:
+        self.age += 1
+
+    def birth(self, cats: list) -> None:
         pass
 
     def describe_cat(self) -> None:
@@ -35,9 +39,10 @@ class Cat:
         print(f'Dead?: {self.dead}')
         print("")
 
-    def impregnate(self) -> None:
-        if not self.neutered:
+    def impregnate(self, father: str) -> None:
+        if not self.neutered and self.sex == "female" and self.age > 2:
             self.pregnant = True
-        
+            self.father_of_litter = father
+
     def mortality(self) -> None:
         pass
